@@ -1,6 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import { Play, ChevronDown, Star } from 'lucide-react';
+import { Play, ChevronDown, Star, ChevronLeft, ChevronRight, Shield, Zap, CreditCard, Clock } from 'lucide-react';
 import FloatingMovies from './FloatingMovies';
+
+const OFFRE_CAROUSEL = [
+  {
+    title: '24h d\'accès',
+    subtitle: '100% gratuit',
+    desc: 'Testez notre catalogue complet pendant 24 heures sans engagement et sans carte bancaire. Votre code d\'accès vous est envoyé instantanément.',
+    icon: Clock,
+  },
+  {
+    title: 'Accès immédiat',
+    subtitle: 'dès réception du code',
+    desc: 'Aucun prélèvement automatique. Catalogue complet débloqué pendant 24h.',
+    icon: Zap,
+  },
+  {
+    title: 'Accès Instantané',
+    subtitle: 'via Telegram',
+    desc: 'Cliquez sur le bouton ci-dessous pour démarrer votre essai gratuit de 24h directement sur notre bot Telegram. Aucune attente, code envoyé immédiatement !',
+    icon: CreditCard,
+  },
+  {
+    title: 'Activation 100%',
+    subtitle: 'sécurisée et gratuite',
+    desc: 'Votre essai gratuit est sans engagement. Aucune carte bancaire requise.',
+    icon: Shield,
+  },
+];
 
 const MOVIES = [
   { 
@@ -83,6 +110,172 @@ const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
   drift: `${(Math.random() - 0.5) * 120}px`,
   size: `${2 + Math.random() * 3}px`,
 }));
+
+function OffreCarousel() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex(prev => (prev + 1) % OFFRE_CAROUSEL.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const goToSlide = (index) => {
+    setActiveIndex(index);
+  };
+
+  const goToPrev = () => {
+    setActiveIndex(prev => (prev - 1 + OFFRE_CAROUSEL.length) % OFFRE_CAROUSEL.length);
+  };
+
+  const goToNext = () => {
+    setActiveIndex(prev => (prev + 1) % OFFRE_CAROUSEL.length);
+  };
+
+  return (
+    <div style={{ marginTop: 48 }}>
+      <div style={{
+        background: 'rgba(201,168,76,0.08)',
+        border: '1px solid rgba(201,168,76,0.2)',
+        borderRadius: 16,
+        padding: '24px 28px',
+        position: 'relative',
+      }}>
+        <h3 style={{
+          fontSize: 13,
+          fontWeight: 600,
+          color: 'var(--gold)',
+          marginBottom: 8,
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+        }}>
+          Offre de bienvenue
+        </h3>
+        
+        {/* Carousel Content */}
+        <div style={{ position: 'relative', minHeight: 100 }}>
+          {OFFRE_CAROUSEL.map((offre, idx) => {
+            const Icon = offre.icon;
+            return (
+              <div key={idx} style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                opacity: activeIndex === idx ? 1 : 0,
+                transform: activeIndex === idx ? 'translateY(0)' : 'translateY(10px)',
+                transition: 'all 0.4s ease',
+                pointerEvents: activeIndex === idx ? 'auto' : 'none',
+                display: activeIndex === idx ? 'block' : 'none',
+              }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+                  <div style={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: 12,
+                    background: 'var(--gold-dim)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                  }}>
+                    <Icon size={22} color="#c9a84c" />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: 20, fontWeight: 700, marginBottom: 4 }}>
+                      {offre.title}
+                    </div>
+                    <div style={{ fontSize: 14, color: 'var(--teal)', marginBottom: 8 }}>
+                      {offre.subtitle}
+                    </div>
+                    <div style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.6 }}>
+                      {offre.desc}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Carousel Dots */}
+        <div style={{
+          display: 'flex',
+          gap: 8,
+          justifyContent: 'center',
+          marginTop: 16,
+        }}>
+          {OFFRE_CAROUSEL.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => goToSlide(idx)}
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                border: 'none',
+                background: activeIndex === idx ? 'var(--gold)' : 'rgba(255,255,255,0.2)',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                padding: 0,
+              }}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
+          ))}
+        </div>
+
+        {/* Arrow Buttons */}
+        <button
+          onClick={goToPrev}
+          style={{
+            position: 'absolute',
+            left: 8,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: 32,
+            height: 32,
+            borderRadius: '50%',
+            border: '1px solid rgba(255,255,255,0.1)',
+            background: 'rgba(0,0,0,0.3)',
+            color: 'var(--white)',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.2s ease',
+          }}
+          aria-label="Previous"
+        >
+          <ChevronLeft size={16} />
+        </button>
+        <button
+          onClick={goToNext}
+          style={{
+            position: 'absolute',
+            right: 8,
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: 32,
+            height: 32,
+            borderRadius: '50%',
+            border: '1px solid rgba(255,255,255,0.1)',
+            background: 'rgba(0,0,0,0.3)',
+            color: 'var(--white)',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.2s ease',
+          }}
+          aria-label="Next"
+        >
+          <ChevronRight size={16} />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function Hero() {
   const duplicatedMovies = [...MOVIES, ...MOVIES, ...MOVIES];
@@ -233,7 +426,7 @@ export default function Hero() {
 
           {/* Stats row */}
           <div style={{
-            display: 'flex', gap: 48, marginTop: 64, flexWrap: 'wrap',
+            display: 'flex', gap: 48, marginTop: 48, flexWrap: 'wrap',
             animation: 'fadeUp 0.7s 0.4s ease both', opacity: 0,
           }}>
             {[
@@ -250,6 +443,11 @@ export default function Hero() {
                 <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', marginTop: 4 }}>{s.label}</div>
               </div>
             ))}
+          </div>
+
+          {/* Offre Carousel */}
+          <div style={{ animation: 'fadeUp 0.7s 0.5s ease both', opacity: 0 }}>
+            <OffreCarousel />
           </div>
         </div>
       </div>

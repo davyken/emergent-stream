@@ -54,7 +54,7 @@ export default function Navbar() {
               onMouseLeave={e => e.target.style.color = 'var(--muted)'}
             >{l.label}</a>
           ))}
-          <a href="#lead" className="btn-primary" style={{ padding: '10px 22px', fontSize: 14 }}>
+          <a href="https://t.me/Emergingstreambot" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '10px 22px', fontSize: 14 }}>
             Essai Gratuit 24h
           </a>
         </div>
@@ -81,7 +81,7 @@ export default function Navbar() {
               color: 'var(--white)', textDecoration: 'none', fontSize: 16, fontWeight: 500,
             }}>{l.label}</a>
           ))}
-          <a href="#lead" className="btn-primary" style={{ alignSelf: 'flex-start' }} onClick={() => setOpen(false)}>
+          <a href="https://t.me/Emergingstreambot" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ alignSelf: 'flex-start' }} onClick={() => setOpen(false)}>
             Essai Gratuit 24h
           </a>
         </div>
