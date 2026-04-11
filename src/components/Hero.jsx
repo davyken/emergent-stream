@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Play, ChevronDown, Star } from 'lucide-react';
+import FloatingMovies from './FloatingMovies';
 
 const MOVIES = [
   { 
@@ -49,7 +50,7 @@ const MOVIES = [
     title: 'House of Dragon', 
     color: '#5822b4', 
     type: 'HBO',
-    image: 'https://images.unsplash.com/photo-1599719162074-b4465ca8768d?q=80&w=2070&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1599719162074-b4465ca8768d?q=80&w=1957&auto=format&fit=crop'
   },
   { 
     id: 8, 
@@ -125,6 +126,9 @@ export default function Hero() {
           ))}
         </div>
       </div>
+
+      {/* Floating Movie Cards (TMDB) */}
+      <FloatingMovies />
 
       {/* Background layers */}
       <div style={{

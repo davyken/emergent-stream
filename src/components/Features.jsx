@@ -1,5 +1,17 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Wifi, Smartphone, Tv2, Globe, Zap, Shield, Download, Headphones } from 'lucide-react';
+import { POPULAR_MOVIES } from './FloatingMovies';
+
+const BACKUP_IMAGES = [
+  'https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?w=200&h=300&fit=crop',
+  'https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=200&h=300&fit=crop',
+  'https://images.unsplash.com/photo-1627873649417-c67f701f1949?w=200&h=300&fit=crop',
+  'https://images.unsplash.com/photo-1614850523296-d8c1af93d400?w=200&h=300&fit=crop',
+  'https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=200&h=300&fit=crop',
+  'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=200&h=300&fit=crop',
+  'https://images.unsplash.com/photo-1599719162074-b4465ca8768d?w=200&h=300&fit=crop',
+  'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=200&h=300&fit=crop',
+];
 
 const FEATURES = [
   {
@@ -105,10 +117,48 @@ function FeatureCard({ icon: Icon, color, bg, title, desc, delay }) {
   );
 }
 
+function MoviePosterMovie({ movie, delay, position }) {
+  const [visible, setVisible] = useState(false);
+  const ref = useRef();
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setVisible(true); }, { threshold: 0.1 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, []);
+
+  const styles = {
+    position: 'absolute',
+    width: 60,
+    borderRadius: 8,
+    overflow: 'hidden',
+    opacity: visible ? 1 : 0,
+    transform: visible ? 'scale(1)' : 'scale(0.5)',
+    transition: `all 0.6s ${delay}ms ease`,
+    zIndex: 0,
+    ...position,
+  };
+
+  return (
+    <div ref={ref} className="movie-poster" style={styles}>
+      <img src={movie.poster} alt={movie.title} />
+    </div>
+  );
+}
+
 export default function Features() {
   return (
-    <section id="features" className="section" style={{ background: 'var(--deep)' }}>
-      <div className="container">
+    <section id="features" className="section" style={{ background: 'var(--deep)', position: 'relative', overflow: 'hidden' }}>
+      <MoviePosterMovie movie={POPULAR_MOVIES[0]} delay={0} position={{ top: '5%', left: '5%' }} />
+      <MoviePosterMovie movie={POPULAR_MOVIES[1]} delay={200} position={{ top: '10%', right: '8%' }} />
+      <MoviePosterMovie movie={POPULAR_MOVIES[2]} delay={400} position={{ top: '40%', left: '2%' }} />
+      <MoviePosterMovie movie={POPULAR_MOVIES[3]} delay={600} position={{ top: '50%', right: '3%' }} />
+      <MoviePosterMovie movie={POPULAR_MOVIES[4]} delay={800} position={{ bottom: '15%', left: '8%' }} />
+      <MoviePosterMovie movie={POPULAR_MOVIES[5]} delay={1000} position={{ bottom: '10%', right: '10%' }} />
+      <MoviePosterMovie movie={POPULAR_MOVIES[6]} delay={1200} position={{ top: '25%', left: '12%' }} />
+      <MoviePosterMovie movie={POPULAR_MOVIES[7]} delay={1400} position={{ bottom: '30%', right: '15%' }} />
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: 72 }}>
           <div className="tag">Pourquoi Emerging-Stream</div>
           <h2 className="section-title" style={{ marginBottom: 16 }}>
