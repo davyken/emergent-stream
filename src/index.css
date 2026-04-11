@@ -68,6 +68,114 @@ body {
   90%  { opacity: 0.6; }
   100% { transform: translateY(-10vh) translateX(var(--drift)); opacity: 0; }
 }
+@keyframes carouselSlide {
+  0%, 8%   { transform: translateX(0); }
+  10%, 18% { transform: translateX(-10%); }
+  20%, 28% { transform: translateX(-20%); }
+  30%, 38% { transform: translateX(-30%); }
+  40%, 48% { transform: translateX(-40%); }
+  50%, 58% { transform: translateX(-50%); }
+  60%, 68% { transform: translateX(-60%); }
+  70%, 78% { transform: translateX(-70%); }
+  80%, 88% { transform: translateX(-80%); }
+  90%, 98% { transform: translateX(-90%); }
+  100%     { transform: translateX(-100%); }
+}
+
+.movie-carousel-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background: var(--black);
+  z-index: 0;
+}
+
+.movie-carousel-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, transparent 40%, transparent 60%, rgba(0,0,0,0.7) 100%),
+              linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 30%, transparent 70%, rgba(0,0,0,0.8) 100%);
+  z-index: 2;
+}
+
+.movie-carousel-bg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.4) 100%);
+  z-index: 3;
+}
+
+.movie-carousel-bg .carousel-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  width: 1000%;
+  animation: carouselSlide 50s cubic-bezier(0.83, 0, 0.17, 1) infinite;
+  z-index: 1;
+}
+
+.movie-carousel-bg .carousel-item {
+  flex: 0 0 10%;
+  width: 10%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  padding-right: 10%;
+}
+
+.movie-carousel-bg .carousel-item .movie-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.movie-carousel-bg .carousel-item .movie-content {
+  position: relative;
+  z-index: 5;
+  text-align: right;
+  padding: 40px;
+  max-width: 500px;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.movie-carousel-bg .carousel-item .movie-title {
+  font-family: var(--ff-display);
+  font-size: clamp(28px, 3vw, 48px);
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  margin-bottom: 16px;
+}
+
+.movie-carousel-bg .carousel-item .movie-badge {
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
 @keyframes gradMove {
   0%, 100% { background-position: 0% 50%; }
   50%       { background-position: 100% 50%; }

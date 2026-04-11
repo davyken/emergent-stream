@@ -161,140 +161,19 @@ export default function Pricing() {
                   ))}
                 </div>
 
-                <button className={p.highlight ? 'btn-primary' : 'btn-secondary'} onClick={() => handleSelect(p.id)}
-                  style={{ width: '100%', justifyContent: 'center', fontSize: 15 }}>
+                <a 
+                  href="https://t.me/Emergingstreambot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={p.highlight ? 'btn-primary' : 'btn-secondary'}
+                  style={{ width: '100%', justifyContent: 'center', fontSize: 15 }}
+                >
                   {p.cta} <ArrowRight size={15} />
-                </button>
+                </a>
               </div>
             );
           })}
         </div>
-
-        {/* Payment box / funnel steps */}
-        {step !== 'plans' && (
-          <div id="payment-box" style={{
-            maxWidth: 560, margin: '0 auto',
-            background: 'var(--surface)', border: '1px solid rgba(201,168,76,0.2)',
-            borderRadius: 'var(--radius-lg)', padding: 36,
-            animation: 'fadeUp 0.5s ease both',
-          }}>
-
-            {step === 'pay' && plan && (
-              <>
-                <h3 style={{ fontFamily: 'var(--ff-display)', fontSize: 24, marginBottom: 6 }}>
-                  Finaliser votre commande
-                </h3>
-                <p style={{ color: 'var(--muted)', fontSize: 14, marginBottom: 28 }}>
-                  Plan sélectionné : <strong style={{ color: 'var(--gold)' }}>{plan.name}</strong> — {plan.price.toLocaleString()} FCFA/mois
-                </p>
-
-                {/* Order bump */}
-                <div style={{
-                  background: 'var(--card)', border: '1px dashed rgba(201,168,76,0.4)',
-                  borderRadius: 12, padding: '16px 20px', marginBottom: 24,
-                  display: 'flex', alignItems: 'flex-start', gap: 14, cursor: 'pointer',
-                }} onClick={() => setBump(!bump)}>
-                  <input type="checkbox" checked={bump} onChange={() => setBump(!bump)}
-                    style={{ width: 18, height: 18, accentColor: 'var(--gold)', marginTop: 2, cursor: 'pointer', flexShrink: 0 }} />
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4, color: 'var(--gold)' }}>
-                      ➕ {ORDER_BUMP.title} — +{ORDER_BUMP.price.toLocaleString()} FCFA/mois
-                    </div>
-                    <div style={{ fontSize: 13, color: 'var(--muted)' }}>{ORDER_BUMP.desc}</div>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 20, fontSize: 16, fontWeight: 600 }}>
-                  <span>Total</span>
-                  <span style={{ color: 'var(--gold)' }}>{(plan.price + (bump ? ORDER_BUMP.price : 0)).toLocaleString()} FCFA/mois</span>
-                </div>
-
-                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginBottom: 20 }}>
-                  {['💳 Stripe', '📱 Orange Money', '📲 MTN MoMo'].map(m => (
-                    <div key={m} style={{
-                      flex: 1, minWidth: 120, background: 'var(--card)',
-                      border: '1px solid var(--border)', borderRadius: 10,
-                      padding: '10px 14px', textAlign: 'center', fontSize: 13, color: 'var(--muted)',
-                      cursor: 'pointer', transition: 'border-color 0.2s',
-                    }}
-                      onMouseEnter={e => e.currentTarget.style.borderColor = 'rgba(201,168,76,0.4)'}
-                      onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--border)'}
-                    >{m}</div>
-                  ))}
-                </div>
-
-                <button className="btn-primary" onClick={handlePay} style={{ width: '100%', justifyContent: 'center', fontSize: 16 }}>
-                  🔒 Payer maintenant — Accès instantané
-                </button>
-                <p style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center', marginTop: 12 }}>
-                  Paiement sécurisé • Remboursement garanti 7 jours
-                </p>
-              </>
-            )}
-
-            {step === 'upsell' && (
-              <>
-                <div style={{ textAlign: 'center', marginBottom: 24 }}>
-                  <div style={{ fontSize: 48, marginBottom: 12 }}>🎁</div>
-                  <h3 style={{ fontFamily: 'var(--ff-display)', fontSize: 26, marginBottom: 10 }}>
-                    Offre Spéciale — Une seule fois !
-                  </h3>
-                  <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.7 }}>
-                    Passez au plan <strong style={{ color: '#a78bfa' }}>Famille</strong> maintenant et économisez <strong style={{ color: 'var(--gold)' }}>3 mois gratuits</strong>.
-                    Partagez avec jusqu'à 6 membres de votre famille.
-                  </p>
-                </div>
-                <div style={{ background: 'var(--card)', borderRadius: 12, padding: 20, marginBottom: 20, textAlign: 'center' }}>
-                  <span style={{ fontFamily: 'var(--ff-display)', fontSize: 36, fontWeight: 700, color: '#a78bfa' }}>7 500</span>
-                  <span style={{ color: 'var(--muted)' }}> FCFA/mois • 6 écrans</span>
-                </div>
-                <div style={{ display: 'flex', gap: 12 }}>
-                  <button className="btn-secondary" onClick={handleUpsellDecline} style={{ flex: 1, justifyContent: 'center', fontSize: 14 }}>
-                    Non merci
-                  </button>
-                  <button className="btn-primary" onClick={handleUpsellAccept} style={{ flex: 2, justifyContent: 'center', fontSize: 14 }}>
-                    Oui, je passe au Famille !
-                  </button>
-                </div>
-              </>
-            )}
-
-            {step === 'downsell' && (
-              <>
-                <div style={{ textAlign: 'center', marginBottom: 24 }}>
-                  <div style={{ fontSize: 48, marginBottom: 12 }}>⚡</div>
-                  <h3 style={{ fontFamily: 'var(--ff-display)', fontSize: 26, marginBottom: 10 }}>
-                    Attendez ! Voici une alternative
-                  </h3>
-                  <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.7 }}>
-                    Ajoutez simplement <strong style={{ color: 'var(--teal)' }}>1 écran supplémentaire</strong> à votre plan actuel pour seulement <strong style={{ color: 'var(--gold)' }}>+1 000 FCFA/mois</strong>.
-                  </p>
-                </div>
-                <div style={{ display: 'flex', gap: 12 }}>
-                  <button className="btn-secondary" onClick={handleDownsellDecline} style={{ flex: 1, justifyContent: 'center', fontSize: 14 }}>
-                    Non, continuer
-                  </button>
-                  <button className="btn-primary" onClick={handleDownsellAccept} style={{ flex: 2, justifyContent: 'center', fontSize: 14 }}>
-                    Oui, ajouter 1 écran
-                  </button>
-                </div>
-              </>
-            )}
-
-            {step === 'done' && (
-              <div style={{ textAlign: 'center', padding: '10px 0' }}>
-                <div style={{ fontSize: 56, marginBottom: 16 }}>✅</div>
-                <h3 style={{ fontFamily: 'var(--ff-display)', fontSize: 28, marginBottom: 12 }}>
-                  Commande confirmée !
-                </h3>
-                <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.7 }}>
-                  Vos identifiants d'accès vous ont été envoyés automatiquement.
-                  Bon streaming ! 🎬
-                </p>
-              </div>
-            )}
-          </div>
-        )}
       </div>
 
       <style>{`

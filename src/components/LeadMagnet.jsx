@@ -49,12 +49,14 @@ export default function LeadMagnet() {
             </div>
           </div>
 
-          {/* Right — Form */}
+          {/* Right — Telegram CTA */}
           <div className="glass-card" style={{
             background: 'var(--surface)',
             border: '1px solid rgba(201,168,76,0.15)',
             boxShadow: 'var(--shadow-gold)',
             position: 'relative', overflow: 'hidden',
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            textAlign: 'center', padding: '60px 40px'
           }}>
             {/* Decorative corner */}
             <div style={{
@@ -63,74 +65,29 @@ export default function LeadMagnet() {
               background: 'radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%)',
             }} />
 
-            {!sent ? (
-              <>
-                <h3 style={{
-                  fontFamily: 'var(--ff-display)', fontSize: 28,
-                  fontWeight: 600, marginBottom: 8,
-                }}>Démarrez votre essai</h3>
-                <p style={{ fontSize: 14, color: 'var(--muted)', marginBottom: 28 }}>
-                  Remplissez le formulaire, votre code arrive en moins de 2 minutes.
-                </p>
+            <div style={{ fontSize: 64, marginBottom: 24 }}>📱</div>
+            <h3 style={{
+              fontFamily: 'var(--ff-display)', fontSize: 32,
+              fontWeight: 600, marginBottom: 16,
+            }}>Accès Instantané via Telegram</h3>
+            <p style={{ fontSize: 16, color: 'var(--muted)', marginBottom: 32, lineHeight: 1.6 }}>
+              Cliquez sur le bouton ci-dessous pour démarrer votre essai gratuit de 24h directement sur notre bot Telegram.
+              Aucune attente, code envoyé immédiatement !
+            </p>
 
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-                  <div>
-                    <label style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', color: 'var(--muted)', textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>Votre Prénom</label>
-                    <input
-                      type="text" placeholder="ex : Jean-Pierre"
-                      value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-                      required
-                      style={{
-                        width: '100%', background: 'var(--card)',
-                        border: '1px solid var(--border)', borderRadius: 10,
-                        padding: '13px 16px', color: 'var(--white)', fontSize: 15,
-                        fontFamily: 'var(--ff-body)', outline: 'none', transition: 'border-color 0.2s',
-                      }}
-                      onFocus={e => e.target.style.borderColor = 'rgba(201,168,76,0.5)'}
-                      onBlur={e => e.target.style.borderColor = 'var(--border)'}
-                    />
-                  </div>
-                  <div>
-                    <label style={{ fontSize: 12, fontWeight: 600, letterSpacing: '0.08em', color: 'var(--muted)', textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>Email ou WhatsApp</label>
-                    <input
-                      type="text" placeholder="ex : jean@email.com ou +237 6xx xxx xxx"
-                      value={form.contact} onChange={e => setForm({ ...form, contact: e.target.value })}
-                      required
-                      style={{
-                        width: '100%', background: 'var(--card)',
-                        border: '1px solid var(--border)', borderRadius: 10,
-                        padding: '13px 16px', color: 'var(--white)', fontSize: 15,
-                        fontFamily: 'var(--ff-body)', outline: 'none', transition: 'border-color 0.2s',
-                      }}
-                      onFocus={e => e.target.style.borderColor = 'rgba(201,168,76,0.5)'}
-                      onBlur={e => e.target.style.borderColor = 'var(--border)'}
-                    />
-                  </div>
-                  <button type="submit" className="btn-primary" style={{ marginTop: 8, justifyContent: 'center', fontSize: 16 }}>
-                    <Send size={16} /> Recevoir mon code gratuit
-                  </button>
-                  <p style={{ fontSize: 12, color: 'var(--muted)', textAlign: 'center', lineHeight: 1.6 }}>
-                    🔒 Vos données sont sécurisées et ne seront jamais partagées.
-                  </p>
-                </form>
-              </>
-            ) : (
-              <div style={{ textAlign: 'center', padding: '20px 0' }}>
-                <div style={{ fontSize: 56, marginBottom: 16 }}>🎉</div>
-                <h3 style={{ fontFamily: 'var(--ff-display)', fontSize: 26, fontWeight: 600, marginBottom: 12 }}>
-                  Bienvenue, {form.name} !
-                </h3>
-                <p style={{ color: 'var(--muted)', fontSize: 15, lineHeight: 1.7 }}>
-                  Votre code d'accès gratuit a été envoyé à <strong style={{ color: 'var(--gold)' }}>{form.contact}</strong>.
-                  Vérifiez vos messages dans les 2 prochaines minutes.
-                </p>
-                <div style={{ marginTop: 24 }}>
-                  <a href="#pricing" className="btn-primary">
-                    Voir nos offres Premium →
-                  </a>
-                </div>
-              </div>
-            )}
+            <a 
+              href="https://t.me/Emergingstreambot" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn-primary" 
+              style={{ fontSize: 18, padding: '20px 48px', width: '100%', justifyContent: 'center' }}
+            >
+              <Send size={20} /> Démarrer mon essai sur Telegram
+            </a>
+            
+            <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 20 }}>
+              🔒 Activation 100% sécurisée et gratuite
+            </p>
           </div>
         </div>
       </div>
