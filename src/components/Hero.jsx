@@ -446,9 +446,9 @@ export default function Hero() {
           </div>
 
           {/* Offre Carousel */}
-          <div style={{ animation: 'fadeUp 0.7s 0.5s ease both', opacity: 0 }}>
+          {/* <div style={{ animation: 'fadeUp 0.7s 0.5s ease both', opacity: 0 }}>
             <OffreCarousel />
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -462,6 +462,6 @@ export default function Hero() {
         <span style={{ fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Découvrir</span>
         <ChevronDown size={18} />
       </div>
-    </section>
+</section>
   );
 }
