@@ -281,7 +281,7 @@ export default function Hero() {
   const duplicatedMovies = [...MOVIES, ...MOVIES, ...MOVIES];
 
   return (
-    <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+    <section style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', contain: 'layout paint' }}>
 
       {/* Movie Background Carousel */}
       <div className="movie-carousel-bg">
@@ -387,13 +387,13 @@ export default function Hero() {
             letterSpacing: '-0.02em', marginBottom: 28,
             animation: 'fadeUp 0.7s 0.1s ease both', opacity: 0,
           }}>
-            Le Streaming qui<br />
+            Bienvenue a<br />
             <span style={{
               background: 'linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 40%, var(--gold) 100%)',
               backgroundSize: '200% auto',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
               animation: 'shimmer 3s linear infinite',
-            }}>s'adapte à vous</span>
+            }}>Emerging Stream</span>
           </h1>
 
           <p style={{
