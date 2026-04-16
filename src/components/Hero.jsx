@@ -387,7 +387,7 @@ export default function Hero() {
             letterSpacing: '-0.02em', marginBottom: 28,
             animation: 'fadeUp 0.7s 0.1s ease both', opacity: 0,
           }}>
-            Bienvenue a<br />
+            Bienvenue sur<br />
             <span style={{
               background: 'linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 40%, var(--gold) 100%)',
               backgroundSize: '200% auto',
