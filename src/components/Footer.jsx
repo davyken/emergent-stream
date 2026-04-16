@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Play, Mail, MessageCircle, Instagram, Twitter, Facebook } from 'lucide-react';
+import { Mail, Instagram, Facebook } from 'lucide-react';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -34,10 +34,8 @@ export default function Footer() {
             </p>
             <div style={{ display: 'flex', gap: 12 }}>
               {[
-                { Icon: MessageCircle, label: 'WhatsApp' },
                 { Icon: Instagram, label: 'Instagram' },
                 { Icon: Facebook, label: 'Facebook' },
-                { Icon: Twitter, label: 'Twitter' },
               ].map(({ Icon, label }) => (
                 <a key={label} href="#" aria-label={label} style={{
                   width: 38, height: 38, borderRadius: 10,
@@ -74,8 +72,8 @@ export default function Footer() {
               title: 'Contact', links: [
                 { label: 'WhatsApp Support', href: '#' },
                 { label: 'Email', href: 'mailto:support@emerging-stream.com' },
-                { label: 'Partenariats', href: '#' },
-                { label: 'Presse', href: '#' },
+                // { label: 'Partenariats', href: '#' },
+                // { label: 'Presse', href: '#' },
               ]
             },
           ].map(col => (
