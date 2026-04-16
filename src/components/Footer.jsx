@@ -20,7 +20,7 @@ export default function Footer() {
           {/* Brand col */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-              <img 
+<img 
                 src="/logo.png" 
                 alt="EmergingStream Logo" 
                 style={{ width: 280, height: 'auto', objectFit: 'contain' }} 
