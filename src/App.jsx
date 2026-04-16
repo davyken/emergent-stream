@@ -73,10 +73,10 @@ function ContactPage() {
           </p>
           <div style={{ display: 'grid', gap: 24, maxWidth: 500 }}>
             <a href="https://wa.me/237698897229" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '16px 24px', fontSize: 16, textAlign: 'center', textDecoration: 'none' }}>
-              📱 Nous contacter sur WhatsApp
+              WhatsApp: 698897229
             </a>
-            <a href="mailto:contact@emergingstream.com" className="btn-secondary" style={{ padding: '16px 24px', fontSize: 16, textAlign: 'center', textDecoration: 'none', display: 'block' }}>
-              ✉️ Envoyer un email
+            <a href="mailto:emergingstream@outlook.com" className="btn-secondary" style={{ padding: '16px 24px', fontSize: 16, textAlign: 'center', textDecoration: 'none', display: 'block' }}>
+              Email: emergingstream@outlook.com
             </a>
           </div>
         </div>

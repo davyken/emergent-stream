@@ -67,10 +67,8 @@ export default function Footer() {
             },
             {
               title: 'Contact', links: [
-                { label: 'WhatsApp Support', href: '#' },
-                { label: 'Email', href: 'mailto:support@emerging-stream.com' },
-                // { label: 'Partenariats', href: '#' },
-                // { label: 'Presse', href: '#' },
+                { label: 'WhatsApp: 698897229', href: 'https://wa.me/237698897229' },
+                { label: 'Email: emergingstream@outlook.com', href: 'mailto:emergingstream@outlook.com' },
               ]
             },
           ].map(col => (
@@ -108,7 +106,7 @@ export default function Footer() {
           <span>© {year} Emerging-Stream. Tous droits réservés.</span>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <Mail size={13} />
-            <span>support@emerging-stream.com</span>
+            <a href="mailto:emergingstream@outlook.com" style={{ color: 'var(--muted)', textDecoration: 'none' }}>emergingstream@outlook.com</a>
           </div>
         </div>
       </div>
