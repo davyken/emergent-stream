@@ -411,15 +411,9 @@ export default function Hero() {
             display: 'flex', gap: 16, flexWrap: 'wrap',
             animation: 'fadeUp 0.7s 0.3s ease both', opacity: 0,
           }}>
-            <a 
-              href="https://t.me/Emergingstreambot" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="btn-primary" 
-              style={{ fontSize: 16, padding: '16px 36px' }}
-            >
+            <Link to="/pricing" className="btn-primary" style={{ fontSize: 16, padding: '16px 36px' }}>
               <Play size={18} fill="currentColor" /> Essai Gratuit 24h
-            </a>
+            </Link>
             <Link to="/pricing" className="btn-secondary" style={{ fontSize: 16 }}>
               Voir les offres
             </Link>

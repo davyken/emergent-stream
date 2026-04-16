@@ -1,14 +1,89 @@
 import React, { useState } from 'react';
-import { Check, Zap, Crown, Star, ArrowRight } from 'lucide-react';
+import { Check, Zap, Crown, Star, ArrowRight, X, Copy, CheckCircle } from 'lucide-react';
+
+function CopyButton({ command }) {
+  const [copied, setCopied] = useState(false);
+  const handleCopy = () => {
+    navigator.clipboard.writeText(command);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <div 
+      onClick={handleCopy}
+      style={{ 
+        background: 'linear-gradient(135deg, rgba(201,168,76,0.15) 0%, rgba(201,168,76,0.05) 100%)',
+        border: '1px solid rgba(201,168,76,0.3)',
+        borderRadius: 10, padding: '10px 14px', cursor: 'pointer',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        transition: 'all 0.2s',
+        minWidth: 160,
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--gold)'; e.currentTarget.style.transform = 'scale(1.02)'; }}
+      onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(201,168,76,0.3)'; e.currentTarget.style.transform = 'scale(1)'; }}
+    >
+      <code style={{ color: 'var(--gold)', fontSize: 14, fontWeight: 700 }}>{command}</code>
+      <span style={{ fontSize: 12, color: copied ? '#34d399' : 'var(--muted)', display: 'flex', alignItems: 'center', gap: 4 }}>
+        {copied ? <CheckCircle size={12} /> : <Copy size={12} />}
+        {copied ? 'Copié!' : 'Copier'}
+      </span>
+    </div>
+  );
+}
+
+function StepCard({ step, title, desc, children }) {
+  return (
+    <div style={{ 
+      background: 'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)',
+      border: '1px solid rgba(255,255,255,0.06)',
+      borderRadius: 14, padding: 16,
+      display: 'flex', alignItems: 'flex-start', gap: 14,
+      transition: 'all 0.2s',
+    }}>
+      <div style={{
+        width: 32, height: 32, borderRadius: 10,
+        background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)',
+        color: '#0a0800', fontSize: 14, fontWeight: 700,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        flexShrink: 0,
+      }}>{step}</div>
+      <div style={{ flex: 1 }}>
+        <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--white)', marginBottom: 4 }}>{title}</div>
+        <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.5, marginBottom: 10 }}>{desc}</div>
+        {children}
+      </div>
+    </div>
+  );
+}
 
 const PLANS = [
   {
-    id: 'starter',
-    name: 'Starter',
+    id: 'trial',
+    name: 'Essai Gratuit',
     badge: null,
     icon: Zap,
-    color: '#7a8694',
-    price: 2500,
+    color: '#2dd4bf',
+    price: 0,
+    period: '/24h',
+    currency: 'FCFA',
+    desc: 'Testez sans engagement',
+    features: [
+      'Accès complet au catalogue',
+      'Qualité HD (720p)',
+      '1 écran simultané',
+      'Aucune carte bancaire',
+      'Sans engagement',
+    ],
+    cta: 'Commencer l\'essai',
+    highlight: false,
+  },
+  {
+    id: 'standard',
+    name: 'Standard',
+    badge: null,
+    icon: Star,
+    color: '#c9a84c',
+    price: 1000,
     period: '/mois',
     currency: 'FCFA',
     desc: 'Idéal pour commencer',
@@ -19,16 +94,16 @@ const PLANS = [
       'Support Email',
       'Mise à jour mensuelle',
     ],
-    cta: 'Commencer',
+    cta: 'Choisir Standard',
     highlight: false,
   },
   {
     id: 'premium',
     name: 'Premium',
     badge: 'Le Plus Populaire',
-    icon: Star,
+    icon: Crown,
     color: '#c9a84c',
-    price: 4500,
+    price: 2500,
     period: '/mois',
     currency: 'FCFA',
     desc: 'La meilleure valeur',
@@ -44,54 +119,24 @@ const PLANS = [
     cta: 'Choisir Premium',
     highlight: true,
   },
-  {
-    id: 'family',
-    name: 'Famille',
-    badge: null,
-    icon: Crown,
-    color: '#a78bfa',
-    price: 7500,
-    period: '/mois',
-    currency: 'FCFA',
-    desc: 'Pour toute la famille',
-    features: [
-      'Tout du plan Premium',
-      '6 écrans simultanés',
-      'Profils enfants sécurisés',
-      'Contrôle parental avancé',
-      'Support prioritaire VIP',
-      'Accès anticipé nouveautés',
-      'Espace stockage 200 Go',
-    ],
-    cta: 'Choisir Famille',
-    highlight: false,
-  },
 ];
 
-const ORDER_BUMP = {
-  title: '+ Anti-Coupure Premium',
-  desc: 'Serveur de secours automatique — gardez le signal même lors des maintenances.',
-  price: 800,
-};
-
 export default function Pricing() {
-  const [selected, setSelected] = useState(null);
-  const [bump, setBump] = useState(false);
-  const [step, setStep] = useState('plans'); // plans | pay | upsell | downsell | done
+  const [showForm, setShowForm] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '' });
 
-  const plan = PLANS.find(p => p.id === selected);
-
-  const handleSelect = (id) => {
-    setSelected(id);
-    setStep('pay');
-    setTimeout(() => document.getElementById('payment-box')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+  const handlePlanClick = (plan) => {
+    setSelectedPlan(plan);
+    setShowForm(true);
   };
 
-  const handlePay = () => setStep('upsell');
-  const handleUpsellAccept = () => setStep('done');
-  const handleUpsellDecline = () => setStep('downsell');
-  const handleDownsellAccept = () => setStep('done');
-  const handleDownsellDecline = () => setStep('done');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setShowForm(false);
+    setShowModal(true);
+  };
 
   return (
     <section id="pricing" className="section" style={{ background: 'var(--black)' }}>
@@ -110,12 +155,11 @@ export default function Pricing() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, marginBottom: 48 }}>
           {PLANS.map(p => {
             const Icon = p.icon;
-            const isActive = selected === p.id;
             return (
               <div key={p.id} style={{
                 position: 'relative',
                 background: p.highlight ? 'linear-gradient(145deg, #1a1e28, #161d26)' : 'var(--card)',
-                border: `1px solid ${isActive ? p.color : p.highlight ? 'rgba(201,168,76,0.3)' : 'var(--border)'}`,
+                border: `1px solid ${p.highlight ? 'rgba(201,168,76,0.3)' : 'var(--border)'}`,
                 borderRadius: 'var(--radius-lg)', padding: '32px 28px',
                 transform: p.highlight ? 'scale(1.03)' : 'scale(1)',
                 boxShadow: p.highlight ? '0 20px 60px rgba(201,168,76,0.1)' : 'none',
@@ -161,20 +205,200 @@ export default function Pricing() {
                   ))}
                 </div>
 
-                <a 
-                  href="https://t.me/Emergingstreambot"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button 
+                  onClick={() => handlePlanClick(p)}
                   className={p.highlight ? 'btn-primary' : 'btn-secondary'}
                   style={{ width: '100%', justifyContent: 'center', fontSize: 15 }}
                 >
                   {p.cta} <ArrowRight size={15} />
-                </a>
+                </button>
               </div>
             );
           })}
         </div>
       </div>
+
+      {/* Form Modal */}
+      {showForm && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 1000,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(4px)',
+        }}>
+          <div style={{
+            background: 'var(--card)', border: '1px solid var(--border)',
+            borderRadius: 16, padding: 32, width: '90%', maxWidth: 420,
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+              <h3 style={{ fontSize: 20, fontWeight: 600, color: 'var(--white)' }}>
+                {selectedPlan?.name}
+              </h3>
+              <button onClick={() => setShowForm(false)} style={{ background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer' }}>
+                <X size={20} />
+              </button>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ display: 'block', fontSize: 14, color: 'var(--muted)', marginBottom: 8 }}>Nom complet</label>
+                <input 
+                  type="text" 
+                  required
+                  value={formData.name}
+                  onChange={(e) => setFormData({...formData, name: e.target.value})}
+                  style={{
+                    width: '100%', padding: '12px 16px', borderRadius: 8,
+                    border: '1px solid var(--border)', background: 'var(--deep)',
+                    color: 'var(--white)', fontSize: 15, outline: 'none',
+                  }}
+                  placeholder="Votre nom"
+                />
+              </div>
+              <div style={{ marginBottom: 16 }}>
+                <label style={{ display: 'block', fontSize: 14, color: 'var(--muted)', marginBottom: 8 }}>Email</label>
+                <input 
+                  type="email" 
+                  required
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  style={{
+                    width: '100%', padding: '12px 16px', borderRadius: 8,
+                    border: '1px solid var(--border)', background: 'var(--deep)',
+                    color: 'var(--white)', fontSize: 15, outline: 'none',
+                  }}
+                  placeholder="votre@email.com"
+                />
+              </div>
+              <div style={{ marginBottom: 24 }}>
+                <label style={{ display: 'block', fontSize: 14, color: 'var(--muted)', marginBottom: 8 }}>Téléphone</label>
+                <input 
+                  type="tel" 
+                  required
+                  value={formData.phone}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  style={{
+                    width: '100%', padding: '12px 16px', borderRadius: 8,
+                    border: '1px solid var(--border)', background: 'var(--deep)',
+                    color: 'var(--white)', fontSize: 15, outline: 'none',
+                  }}
+                  placeholder="+237 6XX XXX XXX"
+                />
+              </div>
+              <button type="submit" className="btn-primary" style={{ width: '100%', fontSize: 16 }}>
+                Confirmer
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Instructions Modal */}
+      {showModal && (
+        <div style={{
+          position: 'fixed', inset: 0, zIndex: 1000,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)',
+        }}>
+          <div style={{
+            background: 'linear-gradient(145deg, #1a1e28 0%, #12151c 100%)',
+            border: '1px solid rgba(201,168,76,0.2)',
+            borderRadius: 24, padding: 32, width: '90%', maxWidth: 520,
+            boxShadow: '0 25px 80px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.05)',
+            maxHeight: '90vh', overflowY: 'auto',
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
+              <div>
+                <h3 style={{ fontSize: 22, fontWeight: 700, color: 'var(--white)', marginBottom: 4 }}>
+                  🎬 Activation du abonnement
+                </h3>
+                <p style={{ fontSize: 13, color: 'var(--muted)' }}>Suivez ces étapes pour accéder à votre plan</p>
+              </div>
+              <button onClick={() => setShowModal(false)} style={{ 
+                background: 'rgba(255,255,255,0.05)', border: 'none', 
+                color: 'var(--muted)', cursor: 'pointer', borderRadius: 8, padding: 8 
+              }}>
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Order Summary - Elegant Card */}
+            <div style={{ 
+              background: 'linear-gradient(135deg, rgba(201,168,76,0.1) 0%, rgba(201,168,76,0.05) 100%)',
+              borderRadius: 16, padding: 20, marginBottom: 24, 
+              border: '1px solid rgba(201,168,76,0.3)',
+              position: 'relative', overflow: 'hidden',
+            }}>
+              <div style={{ position: 'absolute', top: -20, right: -20, width: 80, height: 80, 
+                background: 'radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%)' }} />
+              <div style={{ fontSize: 11, color: 'var(--gold)', fontWeight: 700, letterSpacing: '0.1em', 
+                textTransform: 'uppercase', marginBottom: 16 }}>Résumé de votre commande</div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 10, padding: 12 }}>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>Plan</div>
+                  <div style={{ fontSize: 15, color: 'var(--white)', fontWeight: 600 }}>{selectedPlan?.name}</div>
+                </div>
+                <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 10, padding: 12 }}>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>Montant</div>
+                  <div style={{ fontSize: 15, color: 'var(--gold)', fontWeight: 700 }}>{selectedPlan?.price === 0 ? 'Gratuit' : `${selectedPlan?.price.toLocaleString()} FCAF`}</div>
+                </div>
+                <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 10, padding: 12 }}>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>Nom</div>
+                  <div style={{ fontSize: 13, color: 'var(--white)' }}>{formData.name}</div>
+                </div>
+                <div style={{ background: 'rgba(0,0,0,0.3)', borderRadius: 10, padding: 12 }}>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>Téléphone</div>
+                  <div style={{ fontSize: 13, color: 'var(--white)' }}>{formData.phone}</div>
+                </div>
+              </div>
+              <div style={{ marginTop: 12, background: 'rgba(0,0,0,0.3)', borderRadius: 10, padding: 12 }}>
+                <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 4 }}>Email</div>
+                <div style={{ fontSize: 13, color: 'var(--white)' }}>{formData.email}</div>
+              </div>
+            </div>
+
+            {/* Steps with beautiful styling */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <StepCard step={1} title="Démarrer le bot" desc="Ouvrez Telegram et appuyez sur le bouton ci-dessous pour démarrer">
+                <CopyButton command="/start" />
+              </StepCard>
+              
+              <StepCard step={2} title="Fournir vos informations" desc="Le bot vous demandera votre nom, téléphone et email — répondez simplement">
+                <span style={{ fontSize: 24 }}>📝</span>
+              </StepCard>
+              
+              <StepCard step={3} title="Voir les abonnements" desc="Cliquez sur le lien du canal OU copiez cette commande">
+                <CopyButton command="/abonnements" />
+              </StepCard>
+              
+              <StepCard step={4} title="Choisir votre forfait" desc="Sélectionnez le plan souhaité — le bot vous enverra le numéro de paiement">
+                <span style={{ fontSize: 24 }}>💳</span>
+              </StepCard>
+              
+              <StepCard step={5} title="Effectuer le paiement" desc="Faites le paiement via le numéro reçu et envoyez la capture d'écran au bot">
+                <span style={{ fontSize: 24 }}>📸</span>
+              </StepCard>
+              
+              <StepCard step={6} title="Recevoir vos accès" desc="En moins de 2 minutes, recevez le lien de la plateforme et votre code d'activation">
+                <span style={{ fontSize: 24 }}>🎉</span>
+              </StepCard>
+            </div>
+
+            <a 
+              href="https://t.me/Emergingstreambot" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="btn-primary" 
+              style={{ 
+                width: '100%', marginTop: 24, justifyContent: 'center', fontSize: 16,
+                padding: '16px 32px', fontWeight: 600,
+                background: 'linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%)',
+                color: '#0a0800',
+              }}
+            >
+              🚀 Ouvrir Telegram maintenant
+            </a>
+          </div>
+        </div>
+      )}
 
       <style>{`
         @media (max-width: 640px) {

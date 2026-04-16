@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Play, ArrowRight } from 'lucide-react';
 
 export default function CTABanner() {
@@ -42,18 +43,12 @@ export default function CTABanner() {
           Rejoignez +2 400 familles africaines qui profitent d'Emerging-Stream chaque jour.
         </p>
         <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a 
-            href="https://t.me/Emergingstreambot" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="btn-primary" 
-            style={{ fontSize: 17, padding: '18px 44px' }}
-          >
+          <Link to="/pricing" className="btn-primary" style={{ fontSize: 17, padding: '18px 44px' }}>
             <Play size={20} fill="currentColor" /> Démarrer — Gratuit 24h
-          </a>
-          <a href="#pricing" className="btn-secondary" style={{ fontSize: 17 }}>
+          </Link>
+          <Link to="/pricing" className="btn-secondary" style={{ fontSize: 17 }}>
             Voir les tarifs <ArrowRight size={16} />
-          </a>
+          </Link>
         </div>
 
         <p style={{ marginTop: 24, fontSize: 13, color: 'var(--muted)' }}>

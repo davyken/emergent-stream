@@ -57,9 +57,9 @@ export default function Navbar() {
               onMouseLeave={e => e.target.style.color = 'var(--muted)'}
             >{l.label}</Link>
           ))}
-          <a href="https://t.me/Emergingstreambot" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '10px 22px', fontSize: 14 }}>
+          <Link to="/pricing" className="btn-primary" style={{ padding: '10px 22px', fontSize: 14 }}>
             Essai Gratuit 24h
-          </a>
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
@@ -84,9 +84,9 @@ export default function Navbar() {
               color: 'var(--white)', textDecoration: 'none', fontSize: 16, fontWeight: 500,
             }}>{l.label}</Link>
           ))}
-          <a href="https://t.me/Emergingstreambot" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ alignSelf: 'flex-start' }} onClick={() => setOpen(false)}>
+          <Link to="/pricing" className="btn-primary" style={{ alignSelf: 'flex-start' }} onClick={() => setOpen(false)}>
             Essai Gratuit 24h
-          </a>
+          </Link>
         </div>
       )}
 

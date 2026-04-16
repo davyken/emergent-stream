@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Play, Mail, MessageCircle, Instagram, Twitter, Facebook } from 'lucide-react';
 
 export default function Footer() {
@@ -62,19 +63,11 @@ export default function Footer() {
           {/* Links */}
           {[
             {
-              title: 'Service', links: [
-                { label: 'Fonctionnalités', href: '#features' },
-                { label: 'Tarifs', href: '#pricing' },
-                { label: 'Essai Gratuit', href: '#lead' },
-                { label: 'FAQ', href: '#faq' },
-              ]
-            },
-            {
-              title: 'Légal', links: [
-                { label: 'Mentions légales', href: '#' },
-                { label: 'Confidentialité', href: '#' },
-                { label: 'CGU', href: '#' },
-                { label: 'Cookies', href: '#' },
+              title: 'Services', links: [
+                { label: 'Fonctionnalités', to: '/features' },
+                { label: 'Tarifs', to: '/pricing' },
+                { label: 'Témoignages', to: '/testimonials' },
+                { label: 'FAQ', to: '/faq' },
               ]
             },
             {
@@ -90,12 +83,21 @@ export default function Footer() {
               <h4 style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 20 }}>{col.title}</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {col.links.map(l => (
-                  <a key={l.label} href={l.href} style={{
-                    fontSize: 14, color: 'var(--muted)', textDecoration: 'none', transition: 'color 0.2s',
-                  }}
-                    onMouseEnter={e => e.target.style.color = 'var(--white)'}
-                    onMouseLeave={e => e.target.style.color = 'var(--muted)'}
-                  >{l.label}</a>
+                  l.to ? (
+                    <Link key={l.label} to={l.to} style={{
+                      fontSize: 14, color: 'var(--muted)', textDecoration: 'none', transition: 'color 0.2s',
+                    }}
+                      onMouseEnter={e => e.target.style.color = 'var(--white)'}
+                      onMouseLeave={e => e.target.style.color = 'var(--muted)'}
+                    >{l.label}</Link>
+                  ) : (
+                    <a key={l.label} href={l.href} style={{
+                      fontSize: 14, color: 'var(--muted)', textDecoration: 'none', transition: 'color 0.2s',
+                    }}
+                      onMouseEnter={e => e.target.style.color = 'var(--white)'}
+                      onMouseLeave={e => e.target.style.color = 'var(--muted)'}
+                    >{l.label}</a>
+                  )
                 ))}
               </div>
             </div>

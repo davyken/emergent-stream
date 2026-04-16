@@ -72,8 +72,8 @@ function ContactPage() {
             Vous avez des questions ? Notre équipe est disponible pour vous aider.
           </p>
           <div style={{ display: 'grid', gap: 24, maxWidth: 500 }}>
-            <a href="https://t.me/Emergingstreambot" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '16px 24px', fontSize: 16, textAlign: 'center', textDecoration: 'none' }}>
-              📱 Nous contacter sur Telegram
+            <a href="https://wa.me/237698897229" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '16px 24px', fontSize: 16, textAlign: 'center', textDecoration: 'none' }}>
+              📱 Nous contacter sur WhatsApp
             </a>
             <a href="mailto:contact@emergingstream.com" className="btn-secondary" style={{ padding: '16px 24px', fontSize: 16, textAlign: 'center', textDecoration: 'none', display: 'block' }}>
               ✉️ Envoyer un email

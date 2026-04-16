@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { UserPlus, CreditCard, Mail, Play } from 'lucide-react';
 import { ANIME_MOVIES } from './FloatingMovies';
 
@@ -171,9 +172,9 @@ export default function HowItWorks() {
         </div>
 
         <div style={{ textAlign: 'center', marginTop: 56 }}>
-          <a href="#lead" className="btn-primary" style={{ fontSize: 16, padding: '16px 40px' }}>
+          <Link to="/pricing" className="btn-primary" style={{ fontSize: 16, padding: '16px 40px' }}>
             <Play size={18} fill="currentColor" /> Commencer maintenant
-          </a>
+          </Link>
         </div>
       </div>
 
