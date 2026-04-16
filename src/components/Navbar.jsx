@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Play, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
@@ -12,10 +13,12 @@ export default function Navbar() {
   }, []);
 
   const links = [
-    { label: 'Fonctionnalités', href: '#features' },
-    { label: 'Tarifs', href: '#pricing' },
-    { label: 'Témoignages', href: '#testimonials' },
-    { label: 'FAQ', href: '#faq' },
+    { label: 'Home', to: '/' },
+    { label: 'Fonctionnalités', to: '/features' },
+    { label: 'Tarifs', to: '/pricing' },
+    { label: 'Témoignages', to: '/testimonials' },
+    { label: 'FAQ', to: '/faq' },
+    { label: 'Contact', to: '/contact' },
   ];
 
   return (
@@ -29,7 +32,7 @@ export default function Navbar() {
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         {/* Logo */}
-        <a href="#" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
           <img 
             src="/emergentlogo.jpeg" 
             alt="EmergingStream Logo" 
@@ -41,18 +44,18 @@ export default function Navbar() {
           }}>
             Emerging<span style={{ color: 'var(--gold)' }}>Stream</span>
           </span>
-        </a>
+        </Link>
 
         {/* Desktop links */}
         <div style={{ display: 'flex', gap: 36, alignItems: 'center' }} className="desktop-nav">
           {links.map(l => (
-            <a key={l.href} href={l.href} style={{
+            <Link key={l.to} to={l.to} style={{
               color: 'var(--muted)', textDecoration: 'none', fontSize: 14,
               fontWeight: 500, transition: 'color 0.2s',
             }}
               onMouseEnter={e => e.target.style.color = 'var(--white)'}
               onMouseLeave={e => e.target.style.color = 'var(--muted)'}
-            >{l.label}</a>
+            >{l.label}</Link>
           ))}
           <a href="https://t.me/Emergingstreambot" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '10px 22px', fontSize: 14 }}>
             Essai Gratuit 24h
@@ -77,9 +80,9 @@ export default function Navbar() {
           display: 'flex', flexDirection: 'column', gap: 20,
         }}>
           {links.map(l => (
-            <a key={l.href} href={l.href} onClick={() => setOpen(false)} style={{
+            <Link key={l.to} to={l.to} onClick={() => setOpen(false)} style={{
               color: 'var(--white)', textDecoration: 'none', fontSize: 16, fontWeight: 500,
-            }}>{l.label}</a>
+            }}>{l.label}</Link>
           ))}
           <a href="https://t.me/Emergingstreambot" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ alignSelf: 'flex-start' }} onClick={() => setOpen(false)}>
             Essai Gratuit 24h
