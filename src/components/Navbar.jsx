@@ -32,18 +32,12 @@ export default function Navbar() {
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         {/* Logo */}
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
           <img 
-            src="/emergentlogo.jpeg" 
+            src="/logo.png" 
             alt="EmergingStream Logo" 
-            style={{ width: 40, height: 40, borderRadius: 10, objectFit: 'cover' }} 
+            className="navbar-logo"
           />
-          <span style={{
-            fontFamily: 'var(--ff-display)', fontSize: 22, fontWeight: 600,
-            color: 'var(--white)', letterSpacing: '-0.01em',
-          }}>
-            Emerging<span style={{ color: 'var(--gold)' }}>Stream</span>
-          </span>
         </Link>
 
         {/* Desktop links */}
@@ -94,7 +88,9 @@ export default function Navbar() {
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .mobile-menu-btn { display: block !important; }
+          .navbar-logo { width: 120px !important; height: auto !important; }
         }
+        .navbar-logo { width: 180px; height: auto; object-fit: contain; }
       `}</style>
     </nav>
   );

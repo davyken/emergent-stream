@@ -21,13 +21,10 @@ export default function Footer() {
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
               <img 
-                src="/emergentlogo.jpeg" 
+                src="/logo.png" 
                 alt="EmergingStream Logo" 
-                style={{ width: 40, height: 40, borderRadius: 10, objectFit: 'cover' }} 
+                style={{ width: 280, height: 'auto', objectFit: 'contain' }} 
               />
-              <span style={{ fontFamily: 'var(--ff-display)', fontSize: 20, fontWeight: 600 }}>
-                Emerging<span style={{ color: 'var(--gold)' }}>Stream</span>
-              </span>
             </div>
             <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.8, maxWidth: 280, marginBottom: 24 }}>
               La plateforme de streaming conçue pour l'Afrique. Fluide, économique et disponible partout.
