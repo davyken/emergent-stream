@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Play, ChevronDown, Star, ChevronLeft, ChevronRight, Shield, Zap, CreditCard, Clock } from 'lucide-react';
 import FloatingMovies from './FloatingMovies';
 
@@ -419,9 +420,9 @@ export default function Hero() {
             >
               <Play size={18} fill="currentColor" /> Essai Gratuit 24h
             </a>
-            <a href="#features" className="btn-secondary" style={{ fontSize: 16 }}>
+            <Link to="/pricing" className="btn-secondary" style={{ fontSize: 16 }}>
               Voir les offres
-            </a>
+            </Link>
           </div>
 
           {/* Stats row */}
