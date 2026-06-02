@@ -69,20 +69,20 @@ export default function LeadMagnet() {
             <h3 style={{
               fontFamily: 'var(--ff-display)', fontSize: 32,
               fontWeight: 600, marginBottom: 16,
-            }}>Accès Instantané via Telegram</h3>
+            }}>Accès à EmergingStream</h3>
             <p style={{ fontSize: 16, color: 'var(--muted)', marginBottom: 32, lineHeight: 1.6 }}>
-              Cliquez sur le bouton ci-dessous pour démarrer votre essai gratuit de 24h directement sur notre bot Telegram.
+              Cliquez sur le bouton ci-dessous pour démarrer votre essai gratuit de 24h directement sur notre plateforme.
               Aucune attente, code envoyé immédiatement !
             </p>
 
             <a 
-              href="https://t.me/Emergingstreambot" 
+              href="https://emergingstream.com" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="btn-primary" 
               style={{ fontSize: 18, padding: '20px 48px', width: '100%', justifyContent: 'center' }}
             >
-              <Send size={20} /> Démarrer mon essai sur Telegram
+              <Send size={20} /> Accéder au site
             </a>
             
             <p style={{ fontSize: 12, color: 'var(--muted)', marginTop: 20 }}>

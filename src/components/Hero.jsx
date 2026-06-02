@@ -18,8 +18,8 @@ const OFFRE_CAROUSEL = [
   },
   {
     title: 'Accès Instantané',
-    subtitle: 'via Telegram',
-    desc: 'Cliquez sur le bouton ci-dessous pour démarrer votre essai gratuit de 24h directement sur notre bot Telegram. Aucune attente, code envoyé immédiatement !',
+    subtitle: 'sur le site',
+    desc: 'Inscrivez-vous pour démarrer votre essai gratuit de 24h directement sur notre plateforme. Aucune attente, accès immédiat !',
     icon: CreditCard,
   },
   {

@@ -9,12 +9,21 @@ import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import CTABanner from './components/CTABanner';
 import Footer from './components/Footer';
-import TelegramButton from './components/TelegramButton';
+import StreamButton from './components/StreamButton';
+
+import LeadMagnet from './components/LeadMagnet';
 
 function HomePage() {
   return (
     <>
       <Hero />
+      <LeadMagnet />
+      <Features />
+      <HowItWorks />
+      <Pricing />
+      <Testimonials />
+      <FAQ />
+      <CTABanner />
     </>
   );
 }
@@ -99,7 +108,7 @@ export default function App() {
           <Route path="/contact" element={<ContactPage />} />
         </Routes>
         <Footer />
-        <TelegramButton />
+        <StreamButton />
       </>
     </BrowserRouter>
   );

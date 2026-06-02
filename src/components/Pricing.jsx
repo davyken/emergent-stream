@@ -218,7 +218,8 @@ export default function Pricing() {
           background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(4px)',
         }}>
           <div style={{
-            background: 'var(--card)', border: '1px solid var(--border)',
+            background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(12px)',
+            border: '1px solid rgba(255,255,255,0.06)',
             borderRadius: 16, padding: 32, width: '90%', maxWidth: 420,
           }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
@@ -232,50 +233,60 @@ export default function Pricing() {
             <form onSubmit={handleSubmit}>
               <div style={{ marginBottom: 16 }}>
                 <label style={{ display: 'block', fontSize: 14, color: 'var(--muted)', marginBottom: 8 }}>Nom complet</label>
-                <input 
-                  type="text" 
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  style={{
-                    width: '100%', padding: '12px 16px', borderRadius: 8,
-                    border: '1px solid var(--border)', background: 'var(--deep)',
-                    color: 'var(--white)', fontSize: 15, outline: 'none',
-                  }}
-                  placeholder="Votre nom"
-                />
+                <div style={{ position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#7a8694' }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+                    </svg>
+                  </span>
+                  <input 
+                    type="text" 
+                    required
+                    className="auth-input"
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    placeholder="Votre nom"
+                  />
+                </div>
               </div>
               <div style={{ marginBottom: 16 }}>
                 <label style={{ display: 'block', fontSize: 14, color: 'var(--muted)', marginBottom: 8 }}>Email</label>
-                <input 
-                  type="email" 
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  style={{
-                    width: '100%', padding: '12px 16px', borderRadius: 8,
-                    border: '1px solid var(--border)', background: 'var(--deep)',
-                    color: 'var(--white)', fontSize: 15, outline: 'none',
-                  }}
-                  placeholder="votre@email.com"
-                />
+                <div style={{ position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#7a8694' }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  </span>
+                  <input 
+                    type="email" 
+                    required
+                    className="auth-input"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    placeholder="votre@email.com"
+                  />
+                </div>
               </div>
               <div style={{ marginBottom: 24 }}>
                 <label style={{ display: 'block', fontSize: 14, color: 'var(--muted)', marginBottom: 8 }}>Téléphone</label>
-                <input 
-                  type="tel" 
-                  required
-                  value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  style={{
-                    width: '100%', padding: '12px 16px', borderRadius: 8,
-                    border: '1px solid var(--border)', background: 'var(--deep)',
-                    color: 'var(--white)', fontSize: 15, outline: 'none',
-                  }}
-                  placeholder="+237 6XX XXX XXX"
-                />
+                <div style={{ position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#7a8694' }}>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  <input 
+                    type="tel" 
+                    required
+                    className="auth-input"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    placeholder="+237 6XX XXX XXX"
+                  />
+                </div>
               </div>
-              <button type="submit" className="btn-primary" style={{ width: '100%', fontSize: 16 }}>
+              <button type="submit" className="auth-btn">
                 Confirmer
               </button>
             </form>
@@ -349,33 +360,25 @@ export default function Pricing() {
 
             {/* Steps with beautiful styling */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <StepCard step={1} title="Démarrer le bot" desc="Ouvrez Telegram et appuyez sur le bouton ci-dessous pour démarrer">
-                <CopyButton command="/start" />
+              <StepCard step={1} title="Créer un compte" desc="Inscrivez-vous gratuitement sur la plateforme avec votre email.">
+                <span style={{ fontSize: 24 }}>👤</span>
               </StepCard>
               
-              <StepCard step={2} title="Fournir vos informations" desc="Le bot vous demandera votre nom, téléphone et email — répondez simplement">
-                <span style={{ fontSize: 24 }}>📝</span>
+              <StepCard step={2} title="Choisir un abonnement" desc="Sélectionnez le forfait qui vous convient depuis votre tableau de bord.">
+                <span style={{ fontSize: 24 }}>⭐</span>
               </StepCard>
               
-              <StepCard step={3} title="Voir les abonnements" desc="Cliquez sur le lien du canal OU copiez cette commande">
-                <CopyButton command="/abonnements" />
-              </StepCard>
-              
-              <StepCard step={4} title="Choisir votre forfait" desc="Sélectionnez le plan souhaité — le bot vous enverra le numéro de paiement">
+              <StepCard step={3} title="Effectuer le paiement" desc="Payez en toute sécurité via Mobile Money ou par carte bancaire.">
                 <span style={{ fontSize: 24 }}>💳</span>
               </StepCard>
               
-              <StepCard step={5} title="Effectuer le paiement" desc="Faites le paiement via le numéro reçu et envoyez la capture d'écran au bot">
-                <span style={{ fontSize: 24 }}>📸</span>
-              </StepCard>
-              
-              <StepCard step={6} title="Recevoir vos accès" desc="En moins de 2 minutes, recevez le lien de la plateforme et votre code d'activation">
-                <span style={{ fontSize: 24 }}>🎉</span>
+              <StepCard step={4} title="Profiter du catalogue" desc="Accès instantané à vos films et séries en illimité.">
+                <span style={{ fontSize: 24 }}>🍿</span>
               </StepCard>
             </div>
 
             <a 
-              href="https://t.me/Emergingstreambot" 
+              href="https://emergingstream.com" 
               target="_blank" 
               rel="noopener noreferrer"
               className="btn-primary" 
@@ -386,7 +389,7 @@ export default function Pricing() {
                 color: '#0a0800',
               }}
             >
-              🚀 Ouvrir Telegram maintenant
+              🚀 Accéder à EmergingStream
             </a>
           </div>
         </div>

@@ -1,31 +1,31 @@
 import React from 'react';
 
-const TelegramButton = () => {
+const StreamButton = () => {
   return (
     <a 
-      href="https://t.me/Emergingstreambot" 
+      href="https://emergingstream.com" 
       target="_blank" 
       rel="noopener noreferrer" 
-      className="telegram-btn"
-      aria-label="Chat on Telegram"
+      className="stream-btn"
+      style={{ background: '#C9A84C' }}
+      aria-label="Access EmergingStream"
     >
       <div className="animate-shake">
         <svg 
-          width="32" 
-          height="32" 
+          width="28" 
+          height="28" 
           viewBox="0 0 24 24" 
           fill="none" 
-          stroke="currentColor" 
+          stroke="#0a0800" 
           strokeWidth="2" 
           strokeLinecap="round" 
           strokeLinejoin="round"
         >
-          <path d="m22 2-7 20-4-9-9-4Z" />
-          <path d="M22 2 11 13" />
+          <polygon points="5 3 19 12 5 21 5 3" fill="#0a0800"></polygon>
         </svg>
       </div>
     </a>
   );
 };
 
-export default TelegramButton;
+export default StreamButton;
