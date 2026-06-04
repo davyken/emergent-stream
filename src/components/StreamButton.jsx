@@ -3,7 +3,7 @@ import React from 'react';
 const StreamButton = () => {
   return (
     <a 
-      href="https://emergingstream.com" 
+      href="https://emerging.onrender.com" 
       target="_blank" 
       rel="noopener noreferrer" 
       className="stream-btn"
